@@ -8,4 +8,4 @@ app = FastAPI()
 async def get_response_api(user_input: str):
     response = get_response(user_input)
     print(response)
-    return response
+    return {"response": "hello"}
