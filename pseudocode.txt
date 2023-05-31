@@ -1,0 +1,5 @@
+FE:
+
+Show question
+Get response
+Send response to backend to get AI response --> API call to GET response with user input as a parameter and AI message in response. 
