@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/gutgutia/AI_Learning/VoiceForm/env"
+VIRTUAL_ENV="/Users/gutgutia/AI_Learning/VoiceForm/VoiceForm_BE/env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
