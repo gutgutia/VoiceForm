@@ -1,12 +1,15 @@
 # Import libraries and modules
+# General libraries
 import os
 import sys
 import openai
 from dotenv import load_dotenv
 import json
 
+# Supabase libraries
 from supabase_py import create_client, Client
 
+# Langchain libraries
 from langchain.llms import OpenAI
 from langchain.chat_models import ChatOpenAI
 from langchain import PromptTemplate, LLMChain
