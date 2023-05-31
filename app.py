@@ -5,6 +5,8 @@ import openai
 from dotenv import load_dotenv
 import json
 
+from supabase_py import create_client, Client
+
 from langchain.llms import OpenAI
 from langchain.chat_models import ChatOpenAI
 from langchain import PromptTemplate, LLMChain
@@ -27,8 +29,33 @@ load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 chatbot = ChatOpenAI(temperature=0, model="gpt-3.5-turbo",
-                     openai_api_key=OPENAI_API_KEY)
+                     openai_api_key=OPENAI_API_KEY)  # type: ignore
 memory = ConversationBufferMemory()
+
+# Create Supabase Client
+url = os.getenv("SUPABASE_URL")
+key = os.getenv("SUPABASE_KEY")
+supabase: Client = create_client(url, key)
+database_response = supabase.table('questions').select("*").execute()
+
+# Function to parse database response from Supabase
+
+
+def parse_database_response(database_response):
+    parsed_response = {}
+    parsed_response['data'] = []
+    for question in database_response['data']:
+        parsed_question = {}
+        parsed_question['question_text'] = question['question_text']
+        parsed_question['question_type'] = question['question_type']
+        parsed_question['isOptional'] = question['isOptional']
+        parsed_response['data'].append(parsed_question)
+
+    return parsed_response
+
+
+parsed_response = parse_database_response(database_response)
+print(json.dumps(parsed_response))
 
 
 FormFields = [
